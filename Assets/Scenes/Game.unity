@@ -3260,6 +3260,7 @@ GameObject:
   - component: {fileID: 921807566}
   - component: {fileID: 921807565}
   - component: {fileID: 921807564}
+  - component: {fileID: 921807567}
   m_Layer: 0
   m_Name: Double Jump Pickup
   m_TagString: Untagged
@@ -3353,6 +3354,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921807562}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &921807567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921807562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3b71aef0b1d8747950c410e1c233e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &962540532
 GameObject:
   m_ObjectHideFlags: 0
@@ -8878,6 +8891,10 @@ PrefabInstance:
     - target: {fileID: 75996954794978237, guid: e48073ffbba45134fa214078b74accf3, type: 3}
       propertyPath: jumpForce
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 75996954794978237, guid: e48073ffbba45134fa214078b74accf3, type: 3}
+      propertyPath: maxJumpCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2039746388306214914, guid: e48073ffbba45134fa214078b74accf3, type: 3}
       propertyPath: m_Name
