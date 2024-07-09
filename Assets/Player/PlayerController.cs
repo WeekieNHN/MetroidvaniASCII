@@ -3,8 +3,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
+
+    [Header("Jump")]
+    public int maxJumpCount = 1;
+    public float coyoteTime = 0.2f;
+    private int jumpCount = 0;
+
+    [Header("Falling")]
     public float gravity = 9.81f;
     public float gravityDownModifier = 1.5f;
     public float maxFallSpeed = 20.0f;
@@ -12,9 +20,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
     private Collider coll;
-
-    public int maxJumpCount = 1;
-    private int jumpCount = 0;
 
     private void Awake()
     {
@@ -25,13 +30,20 @@ public class PlayerController : MonoBehaviour
         rb.useGravity = false;
     }
 
+    public bool IsGrounded () => isGrounded || Time.time - coyoteTimeStart < coyoteTime;
+    bool prevIsGrounded = false;
+    float coyoteTimeStart = 0f;
     private void FixedUpdate()
     {
-        // Reset jump count if necessary
-        if (isGrounded) jumpCount = 0;
-
         // If we overlap on the bottom, we're grounded
         isGrounded = Physics.OverlapBox(transform.position - new Vector3(0f, coll.bounds.extents.y, 0f), coll.bounds.extents * 0.9f, Quaternion.identity).Length > 1;
+
+        // If we just left the ground, save timestamp for coyote time
+        if (!isGrounded && prevIsGrounded)
+            coyoteTimeStart = Time.time;
+        
+        // Save previous isGrounded
+        prevIsGrounded = isGrounded;
 
         // Handle vertical velocity
         float vertical = rb.velocity.y;
@@ -53,13 +65,19 @@ public class PlayerController : MonoBehaviour
         // Handle Jump
         if (_jump)
         {
-            // Increment the jump count
-            jumpCount += 1;
-            // Set the vertical velocity
-            vertical = Mathf.Max(vertical, jumpForce);
-            // "Consume" the jump
-            _jump = false;
+            // Reset jump count if necessary
+            if (IsGrounded()) jumpCount = 0;
+            // Check if we're grounded, or we can jump again in the air
+            if (IsGrounded() || (!isGrounded && jumpCount < maxJumpCount))
+            {
+                // Increment the jump count
+                jumpCount += 1;
+                // Set the vertical velocity
+                vertical = Mathf.Max(vertical, jumpForce);
+            }
         }
+        // "Consume" the jump, regardless of if it was set or not
+        _jump = false;
         
         // Update Velocity
         rb.velocity = new Vector3(horizontal, vertical, 0);
@@ -69,7 +87,7 @@ public class PlayerController : MonoBehaviour
     public void OnJump (InputAction.CallbackContext context)
     {
         // Jump if the context is started and we're grounded
-        if (context.started && (isGrounded || jumpCount < maxJumpCount))
+        if (context.started)
             _jump = true;
     }
 
@@ -83,8 +101,7 @@ public class PlayerController : MonoBehaviour
     public void OnItem(InputAction.CallbackContext context)
     {
         // Only run input once
-        if (!context.started) return;
-
-        Debug.Log("Use item");
+        if (context.started) 
+            Debug.Log("Use item");
     }
 }
