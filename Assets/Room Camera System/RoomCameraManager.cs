@@ -12,8 +12,6 @@ public class RoomCameraManager : MonoBehaviour
 
     public static void ChangeCamera(Vector3 position)
     {
-        Debug.Log("Trying to set position to " + position);
-
         // Only run the change once
         if (instance.Camera.position == position) return;
 
