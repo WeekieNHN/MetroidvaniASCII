@@ -14,7 +14,7 @@ public class AsciiMode : MonoBehaviour
         SetMode(false);
     }
 
-    public bool IsActive = false;
+    public static bool IsActive = false;
     public static UnityEvent<bool> ModeChangedEvent = new UnityEvent<bool>();
 
     // Objects required to render the ascii mode.
@@ -26,9 +26,9 @@ public class AsciiMode : MonoBehaviour
         foreach(GameObject obj in instance.AsciiObjects) obj.SetActive(value);
 
         // Run event to change the world stuff
-        if (instance.IsActive != value) ModeChangedEvent.Invoke(value);
+        if (IsActive != value) ModeChangedEvent.Invoke(value);
 
         // Save active value
-        instance.IsActive = value;
+        IsActive = value;
     }
 }

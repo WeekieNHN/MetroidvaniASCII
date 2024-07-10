@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public float maxFallSpeed = 20.0f;
 
     private Rigidbody rb;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     private Collider coll;
 
     private void Awake()
@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool IsGrounded () => isGrounded || Time.time - coyoteTimeStart < coyoteTime;
-    bool prevIsGrounded = false;
-    float coyoteTimeStart = 0f;
+    [SerializeField] private bool prevIsGrounded = false;
+    [SerializeField] private float coyoteTimeStart = 0f;
     private void FixedUpdate()
     {
         // If we overlap on the bottom, we're grounded

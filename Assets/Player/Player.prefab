@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 3115376429198986130}
   - component: {fileID: 75996954794978237}
   - component: {fileID: 3293622156657450649}
-  m_Layer: 7
+  - component: {fileID: 5323418433984984534}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +135,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &75996954794978237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,10 +149,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
-  jumpForce: 17.5
+  jumpForce: 20
+  maxJumpCount: 1
+  coyoteTime: 0.1
   gravity: 1.25
+  gravityDownModifier: 1.5
   maxFallSpeed: 20
-  maxJumpCount: 2
+  hasItem: 0
 --- !u!114 &3293622156657450649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,3 +234,17 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: 0
   m_Camera: {fileID: 0}
+--- !u!114 &5323418433984984534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039746388306214914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57548b1732e164b8d99c695e56bf66b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMaterial: {fileID: 2100000, guid: 56edae88a1a667542bc718afa8515f58, type: 2}
+  offMaterial: {fileID: 2100000, guid: 8a14e31dad13e424ab707a67e81e4de6, type: 2}
