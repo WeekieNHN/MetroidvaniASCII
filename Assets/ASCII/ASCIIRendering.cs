@@ -47,8 +47,6 @@ namespace UnityStandardAssets.ImageEffects
         {
             if (cam != ourCamera) return;
 
-            Debug.Log("ASCII SHader");
-
             m_ASCII = new Material(ASCIIShader);
             m_ASCII.SetTexture("_CharTex", CharTex);
 

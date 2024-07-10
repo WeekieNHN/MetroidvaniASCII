@@ -8,18 +8,22 @@ public class MaterialSwapper : MonoBehaviour
     public Material onMaterial;
     public Material offMaterial;
 
-    Renderer renderer = null;
+    Renderer meshRenderer = null;
 
-    private void Awake() => GetComponent<Renderer>();
-
+    private void Awake() => meshRenderer = GetComponent<Renderer>();
     private void Start() => AsciiMode.ModeChangedEvent.AddListener(UpdateMaterial);
 
     private void UpdateMaterial (bool value)
     {
-        Debug.Log("changing material to " + value);
+        if (meshRenderer == null) return;
 
-        if (renderer == null) return;
+        Material[] newMaterials = new Material[meshRenderer.materials.Length];
 
-        renderer.materials[0] = (value) ? onMaterial : offMaterial;
+        for (int i = 0; i < newMaterials.Length; i++)
+        {
+            newMaterials[i] = value ? onMaterial : offMaterial;
+        }
+
+        meshRenderer.materials = newMaterials;
     }
 }
