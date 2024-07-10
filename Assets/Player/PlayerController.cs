@@ -98,10 +98,16 @@ public class PlayerController : MonoBehaviour
         _movement = context.ReadValue<Vector2>().x;
     }
 
+    bool mode = false;
     public void OnItem(InputAction.CallbackContext context)
     {
         // Only run input once
         if (context.started) 
             Debug.Log("Use item");
+
+        mode = !mode;
+
+        AsciiMode.SetMode(mode);
+        
     }
 }

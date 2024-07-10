@@ -9,14 +9,11 @@ public class RoomCameraManager : MonoBehaviour
 
     [SerializeField] private Transform Camera;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
 
     public static void ChangeCamera(Vector3 position)
     {
+        Debug.Log("Trying to set position to " + position);
+
         // Only run the change once
         if (instance.Camera.position == position) return;
 
