@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleJumpPickup : MonoBehaviour
+public class AsciiPickup : MonoBehaviour
 {
     [SerializeField] private GameObject popObject;
 
@@ -10,9 +12,7 @@ public class DoubleJumpPickup : MonoBehaviour
         if (!other.gameObject.GetComponent<PlayerController>()) return;
 
         // Set the max jump count
-        other.gameObject.GetComponent<PlayerController>().maxJumpCount = 2;
-
-        other.gameObject.GetComponent<PlayerController>().SetTrail(true);
+        other.gameObject.GetComponent<PlayerController>().hasItem = true;
 
         // Spawn a pop at our position
         if (popObject) 

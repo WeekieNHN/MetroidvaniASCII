@@ -21,14 +21,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
     private Collider coll;
 
+    private TrailRenderer trailRenderer;
+
     private void Awake()
     {
         // Fetch Components
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<Collider>();
+        trailRenderer = GetComponent<TrailRenderer>();
+        
+        // Turn off trail
+        trailRenderer.enabled = false;
+
         // Turn off normal gravity
         rb.useGravity = false;
     }
+
+    public void SetTrail (bool value) => trailRenderer.enabled = value;
 
     public bool IsGrounded () => isGrounded || Time.time - coyoteTimeStart < coyoteTime;
     [SerializeField] private bool prevIsGrounded = false;
@@ -36,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // If we overlap on the bottom, we're grounded
-        isGrounded = Physics.OverlapBox(transform.position - new Vector3(0f, coll.bounds.extents.y, 0f), coll.bounds.extents * 0.9f, Quaternion.identity).Length > 1;
+        isGrounded = Physics.OverlapBox(transform.position - new Vector3(0f, 0.05f, 0f), coll.bounds.extents, Quaternion.identity).Length > 1;
 
         // If we just left the ground, save timestamp for coyote time
         if (!isGrounded && prevIsGrounded)
