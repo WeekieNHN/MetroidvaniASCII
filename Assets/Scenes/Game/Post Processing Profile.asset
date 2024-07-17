@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Post Processing Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 2879580065718471659}
-  - {fileID: 5988062862489870048}
   - {fileID: 456874783749431643}
+  - {fileID: 5988062862489870048}
+  - {fileID: 2879580065718471659}
 --- !u!114 &456874783749431643
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -90,7 +90,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.35
+    m_Value: 0.36
 --- !u!114 &5988062862489870048
 MonoBehaviour:
   m_ObjectHideFlags: 3
